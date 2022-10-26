@@ -251,6 +251,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
   @Autowired
   private CategoryService categoryService;
+  @Autowired
+  private CommentsService commentsService;
 
   //带body信息，带category信息
   private ArticleVo copy(Article article, boolean isTag, boolean isAuthor, boolean isBody, boolean isCategory) {
@@ -279,6 +281,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
       Long categoryId = article.getCategoryId();
       articleVo.setCategory(categoryService.findCategoryById(categoryId));
     }
+    Long articleId = article.getId();
+    Long coms=commentsService.findCommentsByArticleId(articleId);
+    articleVo.setCommentCounts(coms);
     return articleVo;
   }
 

@@ -83,6 +83,18 @@ public class CommentsServiceImpl implements CommentsService {
         return Result.success(null);
 
     }
+/**
+ * TODO 通过文章id获取评论数
+ * @Author lzxmusta刘朝旭
+ * @Date 15:37 2022/10/26
+ * @param articleId
+ * @return Long
+ **/
+    @Override
+    public Long findCommentsByArticleId(Long articleId) {
+        Long coms=commentMapper.findCommentsByArticleId(articleId);
+        return coms;
+    }
 
     //对list表中的comment进行判断
     public List<CommentVo> copyList(List<Comment> commentList) {

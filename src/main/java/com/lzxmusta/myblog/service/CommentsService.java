@@ -9,4 +9,7 @@ public interface CommentsService {
     Result findCommentsById(Long id);
 
     Result setComments(CommentsParams commentsParams);
+
+    Long findCommentsByArticleId(Long articleId);
+
 }

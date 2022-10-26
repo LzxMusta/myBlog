@@ -15,7 +15,7 @@ public class ArticleVo {
 
     private String summary;
 
-    private Integer commentCounts;
+    private Long commentCounts;
 
     private Integer viewCounts;
 

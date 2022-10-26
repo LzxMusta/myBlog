@@ -24,7 +24,7 @@ public class ThreadService {
         try {
             //睡眠5秒 证明不会影响主线程的使用
             Thread.sleep(5000);
-            System.out.println("更新完成");
+            System.out.println("线程池---执行阅读数量更新-- 完成");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
