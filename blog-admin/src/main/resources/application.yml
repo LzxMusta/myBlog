@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    #    加载mysql驱动
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://123.57.128.89:3306/my_blog?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    username: my_blog
+    password: WBpk3pfbpEc8i66s
+
+
+
+server:
+  port: 8889
+
+
+mybatis-plus:
+  #  configuration:
+  #    #        打印mp日志
+  #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+  #    表前缀
+  global-config:
+    db-config:
+      table-prefix: ms_
+      id-type: auto                #设置主键id字段的生成策略为参照数据库设定的策略，当前数据库设置id生成策略为自增
+  type-aliases-package: com.lzxmusta.blogadmin.pojo

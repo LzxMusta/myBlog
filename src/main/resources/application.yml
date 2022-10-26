@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    #    加载mysql驱动
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/my_blog?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+  #   redis配置
+  redis:
+    host: localhost
+    port: 6379
+  servlet:
+    #    使用七牛云
+    #    注意七牛云测试域名 https://static.lzxmusta.com/ 一个月一回收，记得去修改。
+    #    springboot默认只上传1M的图片大小所以修改文件配置
+    multipart:
+      # 上传文件总的最大值
+      max-request-size: 20MB
+      # 单个文件的最大值
+      max-file-size: 2MB
+#配置七牛云密钥
+qiniu:
+  accessKey: wLV_MKQEAaR8yvKQQgc2s82XI92KLgyO6Ledm_7Z
+  accessSecretKey: qfDT941i5YSVL4S--qaJKlLV2D6_i17Ew28VMt4a
+
+
+server:
+  port: 8888
+
+
+mybatis-plus:
+  #  configuration:
+  #    #        打印mp日志
+  #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+  #    表前缀
+  global-config:
+    db-config:
+      table-prefix: ms_
+      id-type: auto                #设置主键id字段的生成策略为参照数据库设定的策略，当前数据库设置id生成策略为自增
+  type-aliases-package: com.lzxmusta.myblog.dao.pojo
