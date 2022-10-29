@@ -9,7 +9,7 @@
            month(from_unixtime(create_date / 1000)) as month,
            count(*)                                 as count
     from ms_article
-    group by year, month
+    group by year,month order by year desc,month desc
   </select>
 
 
@@ -38,7 +38,7 @@
       </if>
     </where>
     <!--order by weight,create_date desc-->
-    order by weight desc
+    order by weight desc,create_date desc
   </select>
 
 

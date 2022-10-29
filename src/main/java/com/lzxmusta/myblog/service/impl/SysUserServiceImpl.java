@@ -100,12 +100,13 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public UserVo findUserVoById(Long id) {
         SysUser sysUser = sysUserMapper.selectById(id);
-        if (sysUser == null){
-            sysUser = new SysUser();
-            sysUser.setId(1L);
-            sysUser.setAvatar("http://rjud6wr5p.hn-bkt.clouddn.com/u=236085137,1979895699&fm=253&fmt=auto&app=138&f=JPEG.webp");
-            sysUser.setNickname("星球人");
-        }
+        System.out.println(sysUser+"==============SysUser sysUser = sysUserMapper.selectById(id);============");
+//        if (sysUser == null){
+//            sysUser = new SysUser();
+//            sysUser.setId(1L);
+//            sysUser.setAvatar("http://rjud6wr5p.hn-bkt.clouddn.com/u=236085137,1979895699&fm=253&fmt=auto&app=138&f=JPEG.webp");
+//            sysUser.setNickname("星球人");
+//        }
         UserVo userVo = new UserVo();
         userVo.setAvatar(sysUser.getAvatar());
         userVo.setNickname(sysUser.getNickname());

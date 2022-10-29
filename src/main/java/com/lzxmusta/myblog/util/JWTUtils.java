@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 密码加密
+ * 密码token加密
  */
 public class JWTUtils {
 

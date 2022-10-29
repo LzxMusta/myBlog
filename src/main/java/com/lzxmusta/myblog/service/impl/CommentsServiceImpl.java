@@ -118,13 +118,16 @@ public class CommentsServiceImpl implements CommentsService {
         Integer level = comment.getLevel();
         if (1 == level) {
             Long id = comment.getId();
+//            System.out.println(id+"================ Long id = comment.getId();================================");
             List<CommentVo> commentVoList = findCommentsByParentId(id);
             commentVo.setChildrens(commentVoList);
         }
         //to User 给谁评论
         if (level > 1) {
             Long toUid = comment.getToUid();
+//            System.out.println(toUid+"============   Long toUid = comment.getToUid();======================");
             UserVo toUserVo = this.sysUserService.findUserVoById(toUid);
+//            System.out.println(toUserVo+"==========UserVo toUserVo = this.sysUserService.findUserVoById(toUid);==========");
             commentVo.setToUser(toUserVo);
         }
         return commentVo;
