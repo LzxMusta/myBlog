@@ -5,6 +5,13 @@ import com.lzxmusta.myblog.dao.mapper.ArticleMapper;
 import com.lzxmusta.myblog.dao.pojo.Article;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+/**
+ * TODO 多线程 阅读数量更新
+ * @Author lzxmusta刘朝旭
+ * @Date 17:45 2022/10/29
+ * @param
+ * @return null
+ **/
 
 @Component
 public class ThreadService {
@@ -22,8 +29,8 @@ public class ThreadService {
         queryWrapper.eq(Article::getViewCounts,article.getViewCounts());
         articleMapper.update(articleUpdate,queryWrapper);
         try {
-            //睡眠5秒 证明不会影响主线程的使用
             Thread.sleep(5000);
+            //睡眠5秒 证明不会影响主线程的使用
             System.out.println("线程池---执行阅读数量更新-- 完成");
         } catch (InterruptedException e) {
             e.printStackTrace();

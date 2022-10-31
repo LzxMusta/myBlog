@@ -9,8 +9,7 @@ public class UserThreadLocal {
      * 线程变量隔离  单例模式
      * 空间换时间
      */
-    private static final ThreadLocal<SysUser> LOCAL = new ThreadLocal<>();
-
+    private static final ThreadLocal<SysUser> LOCAL = new ThreadLocal<SysUser>();
     public static void put(SysUser sysUser){
         LOCAL.set(sysUser);
     }

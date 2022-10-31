@@ -1,6 +1,7 @@
 package com.lzxmusta.myblog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lzxmusta.myblog.dao.mapper.CommentMapper;
 import com.lzxmusta.myblog.dao.pojo.Comment;
 import com.lzxmusta.myblog.dao.pojo.SysUser;
@@ -21,7 +22,7 @@ import java.util.List;
 import static java.lang.Long.valueOf;
 
 @Service
-public class CommentsServiceImpl implements CommentsService {
+public class CommentsServiceImpl extends ServiceImpl<CommentMapper,Comment> implements CommentsService {
 
     @Autowired
     private CommentMapper commentMapper;

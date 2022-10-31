@@ -17,6 +17,29 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
+    /**
+     * 根据文章id删除文章所有信息
+     * @param id
+     * @return
+     */
+    @PostMapping("/delArticle/{id}")
+    public Result delArticle(@PathVariable("id") Long id){
+        Boolean b =articleService.delArticleById(id);
+        return Result.success(b);
+    }
+
+    /**
+     * 修修改文章的查询
+     * @param id
+     * @return
+     */
+    @PostMapping("/{id}")
+    public Result editArticle(@PathVariable("id") Long id){
+        Result result = articleService.finfArticleById(id);
+
+        return  result;
+    }
+
     /*
      * 首页文章列表
      * lzxmusta

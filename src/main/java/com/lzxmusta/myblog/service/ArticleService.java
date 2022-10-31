@@ -38,4 +38,11 @@ public interface ArticleService extends IService<Article> {
      * @return
      */
     Result publish(ArticleParams articleParams);
+
+    /**
+     * 通过id删除文章所有信息
+     * @param id
+     * @return
+     */
+    Boolean delArticleById(Long id);
 }
