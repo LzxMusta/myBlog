@@ -30,6 +30,10 @@ public class ArticleVo {
      * 作者id
      */
     private Long authorId;
+    /**
+     * 作者头像
+     */
+    private String avatar;
 
     private ArticleBodyVo body;
 

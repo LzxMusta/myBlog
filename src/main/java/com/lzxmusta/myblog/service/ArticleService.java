@@ -45,4 +45,11 @@ public interface ArticleService extends IService<Article> {
      * @return
      */
     Boolean delArticleById(Long id);
+
+    /**
+     * 通过id修改文章信息
+     * @param id
+     * @return
+     */
+    Result upArticleById(ArticleParams articleParams);
 }

@@ -217,7 +217,6 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     /**
      * 通过id删除文章所有信息
-     *
      * @param id
      * @return
      */
@@ -231,28 +230,87 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             int body = articleBodyMapper.delete(bodyLambdaQueryWrapper);
             System.out.println(body + "============bodyLambdaQueryWrapper=============");
         }
-//如果 有 tag 删除文章tag表中数据
+        //如果 有 tag 删除文章tag表中数据
         LambdaQueryWrapper<ArticleTag> tagLambdaQueryWrapper = new LambdaQueryWrapper<>();
         tagLambdaQueryWrapper.eq(ArticleTag::getArticleId, id);
         List<Map<String, Object>> maps = articleTagMapper.selectMaps(tagLambdaQueryWrapper);
-        if (!maps.isEmpty()){
+        if (!maps.isEmpty()) {
             int tag = articleTagMapper.delete(tagLambdaQueryWrapper);
-            System.out.println(tag + "============bodyLambdaQueryWrapper=============");
+            System.out.println(tag + "============tagLambdaQueryWrapper=============");
         }
         LambdaQueryWrapper<Article> wapper = new LambdaQueryWrapper<>();
         wapper.eq(Article::getId, id);
         int art = articleMapper.delete(wapper);
-        System.out.println(art + "============bodyLambdaQueryWrapper=============");
+        System.out.println(art + "============ArticleLambdaQueryWrapper=============");
 
         LambdaQueryWrapper<Comment> comment = new LambdaQueryWrapper<>();
 
         comment.eq(Comment::getArticleId, id);
         int count = commentsService.count(comment);
-        if (count>0){
+        if (count > 0) {
             boolean b = commentsService.remove(comment);
-            System.out.println(b + "============bodyLambdaQueryWrapper=============");
+            System.out.println(b + "============commentWrapper=============");
         }
         return true;
+    }
+    /**
+     * 通过id修改文章信息
+     * @param id
+     * @return
+     */
+    @Override
+    public Result upArticleById(ArticleParams articleParams) {
+
+        /**
+         * 1. 修改文章 目的 构建Article对象
+         * 2. 作者id  不变
+         * 3. 标签  删除原有 再将标签加入到 关联列表当中
+         * 4. body 内容更新 article bodyId
+         */
+        Long id = articleParams.getId();
+        //如果 有 tag 删除文章tag表中数据
+        LambdaQueryWrapper<ArticleTag> tagLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        tagLambdaQueryWrapper.eq(ArticleTag::getArticleId, id);
+        List<Map<String, Object>> maps = articleTagMapper.selectMaps(tagLambdaQueryWrapper);
+        if (!maps.isEmpty()) {
+            int tag = articleTagMapper.delete(tagLambdaQueryWrapper);
+            System.out.println(tag + "============tagLambdaQueryWrapper=============");
+        }
+        Article article1 = articleMapper.selectById(id);
+        Long bodyId = article1.getBodyId();
+        Article article = new Article();
+        article.setId(article1.getId());
+        article.setAuthorId(article1.getAuthorId());
+        article.setCategoryId(articleParams.getCategory().getId());
+        article.setCreateDate(System.currentTimeMillis());
+        article.setCommentCounts(article1.getCommentCounts());
+        article.setSummary(articleParams.getSummary());
+        article.setTitle(articleParams.getTitle());
+        article.setViewCounts(article1.getViewCounts());
+        article.setWeight(article1.getWeight());
+        article.setBodyId(bodyId);
+        //tags
+        List<TagVo> tags = articleParams.getTags();
+        if (tags != null) {
+            for (TagVo tag : tags) {
+                ArticleTag articleTag = new ArticleTag();
+                articleTag.setArticleId(article.getId());
+                articleTag.setTagId(tag.getId());
+                this.articleTagMapper.insert(articleTag);
+            }
+        }
+        //body
+        ArticleBody articleBody = new ArticleBody();
+        articleBody.setId(article1.getBodyId());
+        articleBody.setContent(articleParams.getBody().getContent());
+        articleBody.setContentHtml(articleParams.getBody().getContentHtml());
+        articleBody.setArticleId(article.getId());
+        articleBodyMapper.updateById(articleBody);
+        articleMapper.updateById(article);
+
+        ArticleVo articleVo = new ArticleVo();
+        articleVo.setId(article.getId());
+        return Result.success(articleVo);
     }
 
 
@@ -309,9 +367,11 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             Long authorId = article.getAuthorId();
 //      System.out.println(authorId +"===============article.getAuthorId()======authorId============================");
             SysUser user = sysUserService.findUserById(authorId);
+            String avatar = user.getAvatar();
             String nickname = user.getNickname();
             Long id = user.getId();
 //      System.out.println(nickname+"===============sysUserService.findUserById(authorId).getNickname()======nickname============================");
+            articleVo.setAvatar(avatar);
             articleVo.setAuthor(nickname);
             articleVo.setAuthorId(id);
         }

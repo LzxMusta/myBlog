@@ -16,6 +16,18 @@ import org.springframework.web.bind.annotation.*;
 public class ArticleController {
     @Autowired
     private ArticleService articleService;
+/**
+ * TODO 更新编辑文章
+ * @Author lzxmusta刘朝旭
+ * @Date 19:05 2022/11/1
+ * @param articleParams
+ * @return Result
+ **/
+    @PostMapping("/update")
+    public Result updateArt(@RequestBody ArticleParams articleParams){
+        return  articleService.upArticleById(articleParams);
+    }
+
 
     /**
      * 根据文章id删除文章所有信息
@@ -29,7 +41,7 @@ public class ArticleController {
     }
 
     /**
-     * 修修改文章的查询
+     * 修改文章的查询
      * @param id
      * @return
      */
