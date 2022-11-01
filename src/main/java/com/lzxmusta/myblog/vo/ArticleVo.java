@@ -29,6 +29,7 @@ public class ArticleVo {
     /**
      * 作者id
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long authorId;
     /**
      * 作者头像

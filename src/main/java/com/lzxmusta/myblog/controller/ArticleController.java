@@ -36,8 +36,8 @@ public class ArticleController {
      */
     @PostMapping("/delArticle/{id}")
     public Result delArticle(@PathVariable("id") Long id){
-        Boolean b =articleService.delArticleById(id);
-        return Result.success(b);
+        articleService.delArticleById(id);
+        return articleService.delArticleById(id);
     }
 
     /**

@@ -11,10 +11,7 @@ import com.lzxmusta.myblog.dao.pojo.*;
 import com.lzxmusta.myblog.dao.mapper.ArticleMapper;
 import com.lzxmusta.myblog.service.*;
 import com.lzxmusta.myblog.util.UserThreadLocal;
-import com.lzxmusta.myblog.vo.ArticleBodyVo;
-import com.lzxmusta.myblog.vo.ArticleVo;
-import com.lzxmusta.myblog.vo.Result;
-import com.lzxmusta.myblog.vo.TagVo;
+import com.lzxmusta.myblog.vo.*;
 import com.lzxmusta.myblog.vo.params.ArticleParams;
 import com.lzxmusta.myblog.vo.params.PageParams;
 import org.joda.time.DateTime;
@@ -217,18 +214,20 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     /**
      * 通过id删除文章所有信息
+     *
      * @param id
      * @return
      */
     @Override
-    public Boolean delArticleById(Long id) {
+    @Transactional
+    public Result delArticleById(Long id) {
         //如果有 删除文章body
         LambdaQueryWrapper<ArticleBody> bodyLambdaQueryWrapper = new LambdaQueryWrapper<>();
         bodyLambdaQueryWrapper.eq(ArticleBody::getArticleId, id);
         List<Map<String, Object>> selectBodyMaps = articleBodyMapper.selectMaps(bodyLambdaQueryWrapper);
         if (!selectBodyMaps.isEmpty()) {
             int body = articleBodyMapper.delete(bodyLambdaQueryWrapper);
-            System.out.println(body + "============bodyLambdaQueryWrapper=============");
+//            System.out.println(body + "============bodyLambdaQueryWrapper=============");
         }
         //如果 有 tag 删除文章tag表中数据
         LambdaQueryWrapper<ArticleTag> tagLambdaQueryWrapper = new LambdaQueryWrapper<>();
@@ -236,12 +235,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         List<Map<String, Object>> maps = articleTagMapper.selectMaps(tagLambdaQueryWrapper);
         if (!maps.isEmpty()) {
             int tag = articleTagMapper.delete(tagLambdaQueryWrapper);
-            System.out.println(tag + "============tagLambdaQueryWrapper=============");
+//            System.out.println(tag + "============tagLambdaQueryWrapper=============");
         }
         LambdaQueryWrapper<Article> wapper = new LambdaQueryWrapper<>();
         wapper.eq(Article::getId, id);
         int art = articleMapper.delete(wapper);
-        System.out.println(art + "============ArticleLambdaQueryWrapper=============");
+//        System.out.println(art + "============ArticleLambdaQueryWrapper=============");
 
         LambdaQueryWrapper<Comment> comment = new LambdaQueryWrapper<>();
 
@@ -249,16 +248,20 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         int count = commentsService.count(comment);
         if (count > 0) {
             boolean b = commentsService.remove(comment);
-            System.out.println(b + "============commentWrapper=============");
+//            System.out.println(b + "============commentWrapper=============");
         }
-        return true;
+        return Result.success(true);
+
     }
+
     /**
      * 通过id修改文章信息
+     *
      * @param id
      * @return
      */
     @Override
+    @Transactional
     public Result upArticleById(ArticleParams articleParams) {
 
         /**
@@ -274,7 +277,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         List<Map<String, Object>> maps = articleTagMapper.selectMaps(tagLambdaQueryWrapper);
         if (!maps.isEmpty()) {
             int tag = articleTagMapper.delete(tagLambdaQueryWrapper);
-            System.out.println(tag + "============tagLambdaQueryWrapper=============");
+//            System.out.println(tag + "============tagLambdaQueryWrapper=============");
         }
         Article article1 = articleMapper.selectById(id);
         Long bodyId = article1.getBodyId();

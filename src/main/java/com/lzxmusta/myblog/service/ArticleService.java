@@ -44,7 +44,7 @@ public interface ArticleService extends IService<Article> {
      * @param id
      * @return
      */
-    Boolean delArticleById(Long id);
+    Result delArticleById(Long id);
 
     /**
      * 通过id修改文章信息
