@@ -41,7 +41,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/test")
                 .addPathPatterns("/comments/create/change")
-//                .addPathPatterns("/articles/delArticle/{id}")
                 .addPathPatterns("/articles/publish");
     }
 
