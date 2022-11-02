@@ -14,6 +14,7 @@ import com.lzxmusta.myblog.util.UserThreadLocal;
 import com.lzxmusta.myblog.vo.*;
 import com.lzxmusta.myblog.vo.params.ArticleParams;
 import com.lzxmusta.myblog.vo.params.PageParams;
+import com.lzxmusta.myblog.vo.params.SearchParams;
 import org.joda.time.DateTime;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -314,6 +315,23 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         ArticleVo articleVo = new ArticleVo();
         articleVo.setId(article.getId());
         return Result.success(articleVo);
+    }
+
+    /**
+     * 通过标题模糊查询文章列表
+     * @param searchParams
+     * @return
+     */
+    @Override
+    public Result searchArticleList(SearchParams searchParams) {
+        LambdaQueryWrapper<Article> wrapper = new LambdaQueryWrapper<>();
+        wrapper.like(Article::getTitle,searchParams.getSearch());
+//        System.out.println("wrapper:::"+wrapper);
+        List<Article> articleList = articleMapper.selectList(wrapper);
+//        System.out.println("articleList:::"+articleList);
+        List<ArticleVo> articleVoList = copyList(articleList, true, true);
+//        System.out.println("articleVoList:::"+articleVoList);
+        return Result.success(articleVoList);
     }
 
 

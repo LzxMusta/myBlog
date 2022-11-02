@@ -1,5 +1,7 @@
 package com.lzxmusta.myblog.dao.pojo;
 
+import com.baomidou.mybatisplus.annotation.SqlCondition;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
@@ -13,7 +15,7 @@ public class Article {
 //    public static final int Article_Common = 0;
 //@JsonSerialize(using = ToStringSerializer.class)
     private Long id;
-
+    @TableField(value = "TITLE",condition = SqlCondition.LIKE)
     private String title;
 
     private String summary;

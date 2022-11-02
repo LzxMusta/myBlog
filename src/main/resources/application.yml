@@ -2,7 +2,8 @@ spring:
   datasource:
     #    加载mysql驱动
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/my_blog?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+#    url: jdbc:mysql://localhost:3306/my_blog?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/my_blog?useUnicode=true&characterEncoding=utf8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: 123456
   #   redis配置
@@ -31,9 +32,9 @@ server:
 
 
 mybatis-plus:
-  #  configuration:
-  #    #        打印mp日志
-  #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  configuration:
+    #        打印mp日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
   #    表前缀
   global-config:

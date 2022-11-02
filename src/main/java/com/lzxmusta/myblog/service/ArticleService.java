@@ -5,6 +5,7 @@ import com.lzxmusta.myblog.dao.pojo.Article;
 import com.lzxmusta.myblog.vo.Result;
 import com.lzxmusta.myblog.vo.params.ArticleParams;
 import com.lzxmusta.myblog.vo.params.PageParams;
+import com.lzxmusta.myblog.vo.params.SearchParams;
 
 public interface ArticleService extends IService<Article> {
     /*
@@ -52,4 +53,11 @@ public interface ArticleService extends IService<Article> {
      * @return
      */
     Result upArticleById(ArticleParams articleParams);
+
+    /**
+     * 标题查询文章列表
+     * @param searchParams
+     * @return
+     */
+    Result searchArticleList(SearchParams searchParams);
 }

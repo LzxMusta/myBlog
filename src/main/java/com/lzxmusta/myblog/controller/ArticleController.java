@@ -7,6 +7,7 @@ import com.lzxmusta.myblog.service.ArticleService;
 import com.lzxmusta.myblog.vo.Result;
 import com.lzxmusta.myblog.vo.params.ArticleParams;
 import com.lzxmusta.myblog.vo.params.PageParams;
+import com.lzxmusta.myblog.vo.params.SearchParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,22 @@ import org.springframework.web.bind.annotation.*;
 public class ArticleController {
     @Autowired
     private ArticleService articleService;
+
+//    /articles/search
+
+    /**
+     * 根据文章标题查询文章列表
+     * @param searchParams
+     * @return
+     */
+    @PostMapping("/search")
+    public  Result searchArticle(@RequestBody SearchParams searchParams){
+        System.out.println("进入查询接口"+searchParams);
+        return articleService.searchArticleList(searchParams);
+    }
+
 /**
+ *
  * TODO 更新编辑文章
  * @Author lzxmusta刘朝旭
  * @Date 19:05 2022/11/1
