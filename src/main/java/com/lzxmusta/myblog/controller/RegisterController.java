@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/register")
-//@CrossOrigin
+@CrossOrigin
 public class RegisterController {
 
     @Autowired

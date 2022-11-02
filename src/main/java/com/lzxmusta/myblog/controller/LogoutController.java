@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/logout")
-//@CrossOrigin
+@CrossOrigin
 public class LogoutController {
     @Autowired
     private LoginService loginService;

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/login")
-//@CrossOrigin
+@CrossOrigin
 public class LoginController {
     /*
      * 不选择用SysUserService直接做登录业务*/

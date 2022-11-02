@@ -16,6 +16,23 @@
     </properties>
 
     <dependencies>
+        <!--httpClint-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.httpcomponents</groupId>-->
+<!--            <artifactId>httpclient</artifactId>-->
+<!--&lt;!&ndash;            <version>4.5.5</version>&ndash;&gt;-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.apache.httpcomponents</groupId>-->
+<!--            <artifactId>httpmime</artifactId>-->
+<!--&lt;!&ndash;            <version>4.5</version>&ndash;&gt;-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.httpcomponents</groupId>-->
+<!--            <artifactId>httpclient</artifactId>-->
+<!--&lt;!&ndash;            <version>4.5.13</version>&ndash;&gt;-->
+<!--        </dependency>-->
         <!--配置注解处理器-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

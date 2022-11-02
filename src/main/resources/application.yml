@@ -18,6 +18,8 @@ spring:
       max-request-size: 20MB
       # 单个文件的最大值
       max-file-size: 2MB
+
+
 #配置七牛云密钥
 qiniu:
   accessKey: wLV_MKQEAaR8yvKQQgc2s82XI92KLgyO6Ledm_7Z

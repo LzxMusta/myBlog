@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/tags")
-//@CrossOrigin
+@CrossOrigin
 public class TagsController {
   @Autowired
   private TagService tagService;
